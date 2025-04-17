@@ -1,25 +1,23 @@
+import 'package:abc_architecture/board/setting/exports.dart';
+import 'package:abc_architecture/component/product/exports.dart';
 import 'package:flutter/material.dart';
 
-import '../settings/settings_view.dart';
-import 'sample_item.dart';
-import 'sample_item_details_view.dart';
-
 /// Displays a list of SampleItems.
-class SampleItemListView extends StatelessWidget {
-  const SampleItemListView({
+class ProductListPage extends StatelessWidget {
+  const ProductListPage({
     super.key,
-    this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
+    this.items = const [ProductItem(1), ProductItem(2), ProductItem(3)],
   });
 
   static const routeName = '/';
 
-  final List<SampleItem> items;
+  final List<ProductItem> items;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sample Items'),
+        title: const Text('Prouct Items'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -27,7 +25,7 @@ class SampleItemListView extends StatelessWidget {
               // Navigate to the settings page. If the user leaves and returns
               // to the app after it has been killed while running in the
               // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
+              Navigator.restorablePushNamed(context, SettingsPage.routeName);
             },
           ),
         ],
@@ -48,22 +46,7 @@ class SampleItemListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final item = items[index];
 
-          return ListTile(
-            title: Text('SampleItem ${item.id}'),
-            leading: const CircleAvatar(
-              // Display the Flutter Logo image asset.
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-            ),
-            onTap: () {
-              // Navigate to the details page. If the user leaves and returns to
-              // the app after it has been killed while running in the
-              // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(
-                context,
-                SampleItemDetailsView.routeName,
-              );
-            }
-          );
+          return ProductItemTile(item);
         },
       ),
     );
